@@ -1,0 +1,12 @@
+{
+  "extends": ["expo/tsconfig.base", "@starter/config/tsconfig.base.json"],
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/assets/*": ["./assets/*"],
+      "@/locales/*": ["./locales/*"],
+      "@modules/*": ["./modules/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
+}

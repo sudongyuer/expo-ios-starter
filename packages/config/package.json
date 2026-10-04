@@ -1,0 +1,17 @@
+{
+  "name": "@starter/config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./eslint": "./eslint.js",
+    "./tsconfig.base.json": "./tsconfig.base.json"
+  },
+  "dependencies": {
+    "eslint-config-expo": "~57.0.2",
+    "eslint-config-prettier": "^10.1.8"
+  },
+  "peerDependencies": {
+    "eslint": "^9"
+  }
+}

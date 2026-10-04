@@ -1,0 +1,29 @@
+{
+  "name": "expo-ios-starter",
+  "private": true,
+  "packageManager": "pnpm@12.9.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check": "pnpm lint && pnpm typecheck && pnpm i18n && pnpm specs",
+    "lint": "pnpm -r --parallel lint",
+    "typecheck": "pnpm -r --parallel typecheck",
+    "test": "vitest run",
+    "i18n": "node scripts/check-i18n.mjs",
+    "specs": "node scripts/check-specs.mjs --dir docs/specs",
+    "format": "node scripts/format.mjs",
+    "format:check": "prettier --check .",
+    "bundle": "pnpm --filter @starter/mobile bundle",
+    "ios": "pnpm --filter @starter/mobile ios",
+    "start": "pnpm --filter @starter/mobile start",
+    "ui-verify": "node ui-checks/run.mjs",
+    "rename": "node scripts/rename.mjs"
+  },
+  "devDependencies": {
+    "prettier": "3.9.9",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.3"
+  }
+}

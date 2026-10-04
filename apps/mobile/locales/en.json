@@ -1,0 +1,74 @@
+{
+  "tabs": {
+    "home": "Home",
+    "settings": "Settings"
+  },
+  "home": {
+    "title": "Home",
+    "body": "This screen lives in its own navigation stack. Start building your first feature here.",
+    "present": {
+      "header": "present() example",
+      "color": "Color",
+      "none": "None",
+      "footerIdle": "Opens a page that returns a result.",
+      "footerCompleted": "Last result: chose {{color}}",
+      "footerCancelled": "Last result: cancelled"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "demo": {
+      "header": "Example",
+      "toggle": "Toggle",
+      "toggleSubtitle": "State is kept in memory only",
+      "footer": "Rows, switches and headers are drawn by the native StarterKit grouped list."
+    },
+    "general": {
+      "header": "General",
+      "language": "Language",
+      "languageValue": "English",
+      "languageFooter": "Change the app language in the Settings app.",
+      "about": "About"
+    },
+    "developer": {
+      "header": "Developer",
+      "debug": "Debug"
+    }
+  },
+  "about": {
+    "title": "About",
+    "version": "Version",
+    "build": "Build"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "close": "Close"
+  },
+  "presentation": {
+    "missingTitle": "Can't Open",
+    "missingBody": "This page needs to be opened from inside the app."
+  },
+  "pickColor": {
+    "title": "Choose Color"
+  },
+  "colors": {
+    "red": "Red",
+    "orange": "Orange",
+    "green": "Green",
+    "blue": "Blue",
+    "purple": "Purple"
+  },
+  "debug": {
+    "title": "Debug",
+    "scenesHeader": "Scenes",
+    "scenesFooter": "Each scene opens a production screen. Also reachable at starter://debug/scene/<id>.",
+    "missingSceneTitle": "Unknown Scene",
+    "missingSceneBody": "No scene named “{{id}}”.",
+    "scenes": {
+      "home": "Home",
+      "settings": "Settings",
+      "about": "About",
+      "pick-color-missing": "Color picker without presentation"
+    }
+  }
+}
