@@ -16,6 +16,7 @@
     "format:check": "prettier --check .",
     "bundle": "pnpm --filter @starter/mobile bundle",
     "ios": "pnpm --filter @starter/mobile ios",
+    "pods": "pnpm --filter @starter/mobile pods",
     "start": "pnpm --filter @starter/mobile start",
     "ui-verify": "node ui-checks/run.mjs",
     "rename": "node scripts/rename.mjs"

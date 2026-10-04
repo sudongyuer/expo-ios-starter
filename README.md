@@ -77,6 +77,7 @@ docs/specs/                 design specs and their index
 | `pnpm bundle`    | export the iOS JavaScript bundle                            |
 | `pnpm ui-verify` | build a verify build and run `ui-checks/` in light and dark |
 | `pnpm rename`    | rename app, bundle id, scheme and kit                       |
+| `pnpm pods`      | `pod install` after adding or removing kit Swift files      |
 
 See `ui-checks/README.md` for the UI checks.
 
