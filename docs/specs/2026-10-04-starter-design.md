@@ -232,6 +232,8 @@ below are local and git-ignored (`artifacts/`).
 ### Verification
 
 - `pnpm check` → lint, typecheck, i18n, specs pass (2026-10-04).
+- CI `check` on `main` at d431ce7 → success: install, check, format, test, bundle
+  (https://github.com/sudongyuer/expo-ios-starter/actions/runs/37227624662).
 - `pnpm test` → 4 files, 25 tests passed. `packages/core/src/presentation.test.ts` covers
   completed, cancelled, repeated settlement, unknown id, other route, release while unsettled.
   `scripts/check-i18n.test.mjs` "fails when a key is deleted from en".
@@ -249,7 +251,6 @@ below are local and git-ignored (`artifacts/`).
 
 ### Known limits
 
-- Unverified: CI green on `main` — no remote repository was created.
 - Unverified: install on a physical device with a personal team — no signing was configured.
 - The TestFlight workflow has not run. Cloud-managed distribution signing needs an Admin-role
   App Store Connect API key; development-certificate handling on fresh runners may need
