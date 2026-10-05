@@ -6,7 +6,7 @@ type StackScreenOptions = NonNullable<
 >
 
 export const tabStackScreenOptions = {
-  headerLargeTitle: true,
+  headerLargeTitleEnabled: true,
   headerTransparent: true,
   headerShadowVisible: false,
 } satisfies StackScreenOptions

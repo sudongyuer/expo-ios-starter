@@ -45,25 +45,32 @@ All paths under `apps/mobile/src` unless noted.
 
 ## UI baseline
 
-- Apple's Human Interface Guidelines are the primary UI requirement and the acceptance
-  standard. Product references inform behavior only; never copy their branding over
-  native conventions.
-- Use real platform controls. When React Native cannot meet a requirement at system
-  quality, implement it in Swift in the kit. Never imitate a control or simulate an
-  unavailable native effect with decorative RN views or overlays.
-- Screens take colors, spacing, radii, and type from tokens, never raw values. Defaults
-  are UIKit semantic colors, system blue for actions, and neutral system backgrounds.
-  Preserve automatic dark mode and increased-contrast adaptation.
-- Preserve native navigation, safe areas, VoiceOver labels, and touch targets of at least
-  44 pt. Respect system text sizing; do not add special layouts for the largest
-  accessibility sizes unless a spec asks for them.
-- Every tab uses NativeTabs and owns its own native Stack with the native navigation bar;
-  do not draw custom headers. Primary drill-down paths push with system back and
-  interactive pop; sheets are for transient flows.
-- Rows that navigate keep their selection until the user returns, deselect alongside the
-  return transition, and restore it when an interactive pop is cancelled. Action rows
-  deselect immediately. `GroupedList` already does this; keep it when changing it.
+- Apple's Human Interface Guidelines are the primary requirement and acceptance
+  standard; product references inform behavior only.
+- Use real platform controls. When React Native cannot reach system quality, write
+  Swift in the kit. Never imitate a control or native effect with RN views.
+- Screens use tokens, never raw values: semantic colors, system blue for actions,
+  neutral backgrounds; preserve dark mode and increased contrast.
+- Preserve native navigation, safe areas, VoiceOver labels, and 44 pt touch targets.
+  Respect system text sizing; no special layouts for the largest accessibility sizes
+  unless a spec asks.
+- Each tab is a NativeTabs tab with its own native Stack and navigation bar; no custom
+  headers. Drill-down pushes with system back; sheets are for transient flows.
+- Navigating rows stay selected until return, deselect with the return transition, and
+  reselect if the pop is cancelled; action rows deselect at once (as `GroupedList` does).
 - Views that own keyboard layout natively are not wrapped in RN keyboard avoidance.
+
+## Motion
+
+- Add motion with the `animate-expo` skill: gate first, then numbered options with a
+  recommendation. Frequent interactions, tab switches, the keyboard, and stack
+  transitions keep platform behavior.
+- Reanimated only (`npx expo install react-native-reanimated react-native-worklets`;
+  worklets is explicit because `autoInstallPeers` is off). No `setState` from gesture
+  or scroll handlers. Animate `transform` and `opacity`; reduced motion drops movement
+  and keeps opacity and color.
+- Haptics fire with their visual, once per action, never alone. Judge feel on a
+  Release build on a device.
 
 ## Pages and native APIs
 
@@ -73,10 +80,9 @@ All paths under `apps/mobile/src` unless noted.
 - `present` params live in the presentation store; only `presentationId` enters the URL.
   Back, swipe, and unmount settle as `cancelled`; every presentation settles exactly
   once. Presentations are not durable deep links.
-- App code imports native APIs only from `modules/starter-kit/src/index.ts`; never call
-  `requireNativeModule` elsewhere. Keep the typed facade, native view wrappers, and Swift
-  implementations in matching feature directories. Remove every event subscription in
-  effect cleanup. UIKit work runs on the main queue.
+- Native APIs come only from `modules/starter-kit/src/index.ts`, never
+  `requireNativeModule`. Facade, view wrappers, and Swift share feature directories.
+  Remove subscriptions in effect cleanup; UIKit work runs on the main queue.
 - Fault injection, runtime internals, and demos live only on the development-only Debug
   page, reached from Settings. Product screens show only state the user can act on.
 
@@ -96,6 +102,8 @@ All paths under `apps/mobile/src` unless noted.
 - After implementation and before opening or updating its PR, run `spec-lifecycle`;
   `node scripts/check-specs.mjs --dir docs/specs` must pass.
 - An overturned design gets a new spec that supersedes the old one; never delete a spec.
+- Before adding push notifications or an app extension, read
+  `docs/agents/push-and-extensions.md`.
 
 ## Checks
 
@@ -105,16 +113,13 @@ All paths under `apps/mobile/src` unless noted.
 - All user-visible text goes through `t()`; add zh-Hans and en together.
 - Tests assert behavior, not implementation snapshots or mock call counts. They are
   deterministic: fake timers and injected clocks; no real sleeps or network.
-- UI changes add or update a check under `ui-checks/` and run `pnpm ui-verify` in light
-  and dark. Shared controls are checked in every screen that hosts them.
-- UI checks run offline: no login, credentials, or network. Debug scenes use production
-  components and `present`, and inject deterministic outcomes at `src/services` only.
-- Screenshots for visual states, video for motion. Missing scenes and timeouts fail.
-  Screenshots alone do not prove visual correctness; compare against HIG and the
-  previous build.
-- `pnpm ui-verify` owns its `Starter UI Verify` Simulator and build directory. Do not
-  create simulators or pass another `-derivedDataPath` for verification, and do not copy
-  the checkout to a temporary directory.
+- UI changes add or update a check under `ui-checks/`, run `pnpm ui-verify` in light
+  and dark, and cover shared controls in every host screen. Checks run offline; Debug
+  scenes use production components and inject outcomes at `src/services` only.
+- Screenshots for state, video for motion; missing scenes and timeouts fail.
+  Screenshots alone do not prove correctness; compare against HIG and the last build.
+- `pnpm ui-verify` owns its Simulator and build directory: never create simulators,
+  pass another `-derivedDataPath`, or copy the checkout elsewhere.
 - Report skipped checks and why.
 
 ## Conventions
@@ -124,16 +129,6 @@ All paths under `apps/mobile/src` unless noted.
   closed sets with an object; use `if` or `switch` for ordered conditions.
 - Files under 500 lines, components under 300.
 - Generated resources keep their dependency licenses beside them.
-
-## When adding push or app extensions
-
-- The native SDK lives in the kit and initializes before React Native; it caches
-  notification taps until JS acknowledges them. Persist extensions, App Groups, and
-  entitlements through config plugins.
-- Extensions never read the Keychain or open the network; the app shares a
-  credential-free App Group snapshot with them.
-- Notification taps resolve against the signed-in account and are dropped after an
-  account switch. Debug fixtures never request real permission.
 
 ## Rules from incidents
 

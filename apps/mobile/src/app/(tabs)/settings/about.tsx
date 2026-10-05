@@ -13,7 +13,7 @@ export default function AboutScreen() {
   return (
     <>
       <Stack.Screen
-        options={{ title: t('about.title'), headerLargeTitle: false }}
+        options={{ title: t('about.title'), headerLargeTitleEnabled: false }}
       />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
